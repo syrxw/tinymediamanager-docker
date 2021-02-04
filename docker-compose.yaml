@@ -1,13 +1,18 @@
 tinymediamanager_service:
-    image: romancin/tinymediamanager:latest
-    container_name: tinymediamanager
-    ports:
-      - "5803:5800"
-    environment:
-      - USER_ID=0
-      - GROUP_ID=0
-      - TZ=Europe/Madrid
-      - VNC_PASSWORD=password
-    volumes:
-      - "/share/Container/tinymediamanager:/config:rw"
-      - "/share/Container/tinymediamanager/media:/media:rw"
+  image: syrxw/tinymediamanager:latest
+  container_name: tinymediamanager
+  ports:
+    - "5803:5800"
+  environment:
+    - USER_ID=0
+    - GROUP_ID=0
+    - TZ=Europe/Madrid
+    - VNC_PASSWORD=password
+  volumes:
+    - "/share/Container/tinymediamanager:/config:rw"
+    - "/share/Container/tinymediamanager/media:/media:rw"
+  extra_hosts:
+    - "api.themoviedb.org:13.224.161.90"
+    - "image.tmdb.org:104.16.61.155"
+    - "api.themoviedb.org:13.35.67.86"
+    - "www.themoviedb.org:54.192.151.79"

@@ -31,14 +31,14 @@ RUN \
 # Install dependencies.
 RUN \
     add-pkg \
-        # For the 7-Zip-JBinding workaround, Oracle JRE is needed instead of
-        # the Alpine Linux's openjdk native package.
-        # The libstdc++ package is also needed as part of the 7-Zip-JBinding
-        # workaround.
-        #openjdk8-jre \
-        libmediainfo \
-        ttf-dejavu \
-        bash
+    # For the 7-Zip-JBinding workaround, Oracle JRE is needed instead of
+    # the Alpine Linux's openjdk native package.
+    # The libstdc++ package is also needed as part of the 7-Zip-JBinding
+    # workaround.
+    #openjdk8-jre \
+    libmediainfo \
+    ttf-dejavu \
+    bash
 
 # Maximize only the main/initial window.
 # It seems this is not needed for TMM 3.X version.
@@ -50,6 +50,14 @@ RUN \
 RUN \
     APP_ICON_URL=https://gitlab.com/tinyMediaManager/tinyMediaManager/raw/45f9c702615a55725a508523b0524166b188ff75/AppBundler/tmm.png && \
     install_app_icon.sh "$APP_ICON_URL"
+
+# Install Chinese Fonts
+RUN cd /tmp 
+RUN wget https://soft.itbulu.com/fonts/simsun.zip
+RUN unzip simsun.zip
+RUN cp simsun/* /usr/share/fonts
+RUN rm -rf simsun
+RUN fc-cache
 
 # Add files.
 COPY rootfs/ /
@@ -65,8 +73,8 @@ VOLUME ["/media"]
 
 # Metadata.
 LABEL \
-      org.label-schema.name="tinymediamanager" \
-      org.label-schema.description="Docker container for TinyMediaManager" \
-      org.label-schema.version="unknown" \
-      org.label-schema.vcs-url="https://github.com/romancin/tmm-docker" \
-      org.label-schema.schema-version="1.0"
+    org.label-schema.name="tinymediamanager" \
+    org.label-schema.description="Docker container for TinyMediaManager" \
+    org.label-schema.version="unknown" \
+    org.label-schema.vcs-url="https://github.com/syrxw/tinymediamanager-docker" \
+    org.label-schema.schema-version="1.0"
